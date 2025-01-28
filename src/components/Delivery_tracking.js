@@ -31,7 +31,7 @@ const DeliveryTracking = () => {
       />
       <button onClick={handleTrackOrder}>Track Order</button>
       {orderStatus && (
-        <div>
+        <div className="orders" style={{position:"absolute",left:"150px",top:"290px", color:"Black",width:"70%",height:"200px"}}>
           <p>Order ID: {orderStatus.orderId}</p>
           <p>Status: {orderStatus.status}</p>
           <p>Tracking Info: {orderStatus.trackingInfo}</p>
