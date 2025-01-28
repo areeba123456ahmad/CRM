@@ -2,118 +2,125 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./components.css";
 import { jwtDecode } from "jwt-decode";
-const SalesRecords = () => {
-  const [sales, setSales] = useState([]);
-  const [newSale, setNewSale] = useState({
+
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [newOrder, setNewOrder] = useState({
     customer_name: "",
-    product: "",
-    status: "",
+    item_id: "",
+    quantity: "",
+    order_date: "",
+    tracking_id: "",
   });
-  const [editingSale, setEditingSale] = useState(null);
- const token = localStorage.getItem("token");
+  const [editingOrder, setEditingOrder] = useState(null);
+  const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
-        const role=decoded.role;
-  // Function to fetch sales records
-  const fetchSales = () => {
+  const role = decoded.role;
+
+  const fetchOrders = () => {
     axios
-      .get("http://localhost:5000/api/sales", {
+      .get("http://localhost:5000/api/orders", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
-      .then((response) => setSales(response.data))
-      .catch((error) => console.error("Error fetching sales data:", error));
+      .then((response) => setOrders(response.data))
+      .catch((error) => console.error("Error fetching orders:", error));
   };
 
-  // Fetch sales records on component mount
   useEffect(() => {
-    fetchSales();
+    fetchOrders();
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (editingSale) {
-      setEditingSale({ ...editingSale, [name]: value });
+    if (editingOrder) {
+      setEditingOrder({ ...editingOrder, [name]: value });
     } else {
-      setNewSale({ ...newSale, [name]: value });
+      setNewOrder({ ...newOrder, [name]: value });
     }
   };
 
-
-  const canadd = () => {
-    if(role==='Agent'){const permissions = JSON.parse(localStorage.getItem("permissions"));
-      return permissions ? permissions.Per_add : false;}
+  const canAdd = () => {
+    if (role === "Agent") {
+      const permissions = JSON.parse(localStorage.getItem("permissions"));
+      return permissions ? permissions.Per_add : false;
+    }
     return true;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!canadd()) {
-      alert("You do not have permission to edit.");
+    if (!canAdd()) {
+      alert("You do not have permission to add.");
       return;
     }
-    const endpoint = editingSale
-      ? `http://localhost:5000/api/sales/${editingSale.id}`
-      : "http://localhost:5000/api/sales";
+    const endpoint = editingOrder
+      ? `http://localhost:5000/api/orders/${editingOrder.id}`
+      : "http://localhost:5000/api/orders";
 
-    const method = editingSale ? "put" : "post";
-    
-    const data = editingSale
-    ? editingSale
-    : { ...newSale, agent_id: decoded.id };
-    
+    const method = editingOrder ? "put" : "post";
+    const data = editingOrder
+      ? editingOrder
+      : { ...newOrder, agent_id: decoded.id };
+
     axios[method](endpoint, data, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
       .then(() => {
-        fetchSales();
-        setNewSale({ customer_name: "", product: "", status: "" });
-        setEditingSale(null);
+        fetchOrders();
+        setNewOrder({ customer_name: "", item_id: "", quantity: "", order_date: "", tracking_id: "" });
+        setEditingOrder(null);
       })
-      .catch((error) => console.error("Error submitting sale:", error));
+      .catch((error) => console.error("Error submitting order:", error));
   };
 
-
   const canEdit = () => {
-    if(role==='Agent'){const permissions = JSON.parse(localStorage.getItem("permissions"));
-      return permissions ? permissions.Per_add : false;}
+    if (role === "Agent") {
+      const permissions = JSON.parse(localStorage.getItem("permissions"));
+      return permissions ? permissions.Per_edit : false;
+    }
     return true;
   };
 
- 
-
-  const handleEdit = (sale) => {
+  const handleEdit = (order) => {
     if (!canEdit()) {
       alert("You do not have permission to edit.");
       return;
     }
-    setEditingSale({ ...sale });
+    setEditingOrder({ ...order });
   };
 
   const handleCancelEdit = () => {
-    setEditingSale(null);
+    setEditingOrder(null);
   };
 
   return (
-   
-    <div className="sales-records">
-      <h2>Sales Records</h2>
+    <div className="orders">
+      <h2>Order Records</h2>
       <table>
         <thead>
           <tr>
             <th>ID</th>
             <th>Customer</th>
-            <th>Product</th>
-            <th>Status</th>
+            <th>Item ID</th>
+            <th>Quantity</th>
+            <th>Order Date</th>
+            <th>Tracking ID</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {sales.map((sale) => (
-            <tr key={sale.id}>
-              <td>{sale.id}</td>
-              <td>{sale.customer_name}</td>
-              <td>{sale.product}</td>
-              <td>{sale.status}</td>
+          {orders.map((order) => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.customer_name}</td>
+              <td>{order.item_id}</td>
+              <td>{order.quantity}</td>
+              <td>{order.order_date}</td>
+              <td>{order.tracking_id}</td>
               <td>
-                <button onClick={() => handleEdit(sale)}  disabled={!canEdit()}>Edit</button>
+                <button onClick={() => handleEdit(order)} disabled={!canEdit()}>
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
@@ -124,39 +131,54 @@ const SalesRecords = () => {
         <input
           type="text"
           name="customer_name"
-          value={editingSale ? editingSale.customer_name : newSale.customer_name}
+          value={editingOrder ? editingOrder.customer_name : newOrder.customer_name}
           onChange={handleChange}
           placeholder="Customer Name"
           required
         />
         <input
-          type="text"
-          name="product"
-          value={editingSale ? editingSale.product : newSale.product}
+          type="number"
+          name="item_id"
+          value={editingOrder ? editingOrder.item_id : newOrder.item_id}
           onChange={handleChange}
-          placeholder="Product"
+          placeholder="Item ID"
+          required
+        />
+        <input
+          type="number"
+          name="quantity"
+          value={editingOrder ? editingOrder.quantity : newOrder.quantity}
+          onChange={handleChange}
+          placeholder="Quantity"
+          required
+        />
+        <input
+          type="date"
+          name="order_date"
+          value={editingOrder ? editingOrder.order_date : newOrder.order_date}
+          onChange={handleChange}
+          placeholder="Order Date"
           required
         />
         <input
           type="text"
-          name="status"
-          value={editingSale ? editingSale.status : newSale.status}
+          name="tracking_id"
+          value={editingOrder ? editingOrder.tracking_id : newOrder.tracking_id}
           onChange={handleChange}
-          placeholder="Status"
+          placeholder="Tracking ID"
           required
         />
-        <button type="submit" disabled={!canadd()}>
-          {editingSale ? "Update Sale" : "Add Sale"}
+        <button type="submit" disabled={!canAdd()}>
+          {editingOrder ? "Update Order" : "Add Order"}
         </button>
-        {editingSale && (
+        {editingOrder && (
           <button type="button" onClick={handleCancelEdit}>
             Cancel Edit
           </button>
         )}
       </form>
     </div>
-  
   );
 };
 
-export default SalesRecords;
+export default Orders;

@@ -91,25 +91,24 @@ const authenticateToken = (req, res, next) => {
 
 
 // Get all sales records
-app.get("/api/sales", async (req, res) => {
+app.get("/api/orders", async (req, res) => {
   try {
-    const [salesRecords] = await db.query("SELECT * FROM sales");
-    res.status(200).json(salesRecords);
+    const [orderRecords] = await db.query("SELECT * FROM userOrders");
+    res.status(200).json(orderRecords);
   } catch (err) {
-    console.error("Error fetching sales records:", err);
-    res.status(500).json({ error: "Failed to fetch sales records" });
+    console.error("Error fetching order records:", err);
+    res.status(500).json({ error: "Failed to fetch order records" });
   }
 });
 
-// Add a new sale record
-app.post("/api/sales",  async (req, res) => {
-  const { customer_name, product, status } = req.body;
+// Add a new order record
+app.post("/api/orders", async (req, res) => {
+  const { customer_name, item_id, quantity, order_date, tracking_id } = req.body;
   const agent_id = req.agent_id;
-  console.log("agent id ",agent_id);
   try {
     const [result] = await db.query(
-      "INSERT INTO sales (agent_id,customer_name, product, status) VALUES (?,?, ?, ?)",
-      [agent_id,customer_name, product, status]
+      "INSERT INTO userOrders (agent_id, customer_name, item_id, quantity, order_date, tracking_id) VALUES (?, ?, ?, ?, ?, ?)",
+      [agent_id, customer_name, item_id, quantity, order_date, tracking_id]
     );
 
     const [performance] = await db.query(
@@ -142,41 +141,38 @@ app.post("/api/sales",  async (req, res) => {
           1,              // Initial total_sales
           100,            // Default sales_target
           (1 / 100) * 100, // Fulfillment rate = (1 / sales_target) * 100
-          10,              // Pending tasks default to 0
+          10,              // Pending tasks default to 10
           new Date(),     // Performance date set to today
         ]
       );
     }
 
-
-
-
-    res.status(201).json({ id: result.insertId, customer_name, product, status });
+    res.status(201).json({ id: result.insertId, customer_name, item_id, quantity, order_date, tracking_id });
   } catch (err) {
-    console.error("Error adding sale record:", err);
-    res.status(500).json({ error: "Failed to add sale record" });
+    console.error("Error adding order record:", err);
+    res.status(500).json({ error: "Failed to add order record" });
   }
 });
 
-// Update a sale record
-app.put("/api/sales/:id", async (req, res) => {
-  const { customer_name, product, status } = req.body;
+// Update an order record
+app.put("/api/orders/:id", async (req, res) => {
+  const { customer_name, item_id, quantity, order_date, tracking_id } = req.body;
   const { id } = req.params;
 
   try {
     const [result] = await db.query(
-      "UPDATE sales SET customer_name = ?, product = ?, status = ? WHERE id = ?",
-      [customer_name, product, status,  id]
+      "UPDATE userOrders SET customer_name = ?, item_id = ?, quantity = ?, order_date = ?, tracking_id = ? WHERE id = ?",
+      [customer_name, item_id, quantity, order_date, tracking_id, id]
     );
 
     if (result.affectedRows > 0) {
-      res.status(200).json({ message: "Sale record updated successfully" });
+      res.status(200).json({ message: "Order record updated successfully" });
     } else {
-      res.status(404).json({ error: "Sale record not found" });
+      res.status(404).json({ error: "Order record not found" });
     }
   } catch (err) {
-    console.error("Error updating sale record:", err);
-    res.status(500).json({ error: "Failed to update sale record" });
+    console.error("Error updating order record:", err);
+    res.status(500).json({ error: "Failed to update order record" });
   }
 });
 
@@ -425,7 +421,7 @@ app.get("/sales/targets", async (req, res) => {
 app.get('/report/performance-csv', async (req, res) => {
   try {
     
-    const [results] = await db.query('SELECT * FROM agent_performance');
+    const [results] = await db.query('SELECT * FROM agentDetails');
     
     const parser = new Parser();
     const csv = parser.parse(results);
@@ -444,7 +440,7 @@ app.get('/report/performance-csv', async (req, res) => {
 app.get('/report/orders-csv', async (req, res) => {
   try {
     // Query data from the orders table
-    const [orders] = await db.query('SELECT * FROM orders');
+    const [orders] = await db.query('SELECT * FROM userOrders');
 
     // Convert the fetched data to CSV
     const parser = new Parser();
@@ -465,7 +461,7 @@ app.get('/report/orders-csv', async (req, res) => {
 app.get('/report/sales-csv', async (req, res) => {
   try {
     // Query data from the salesdetails table
-    const [salesDetails] = await db.query('SELECT * FROM salesdetails');
+    const [salesDetails] = await db.query('SELECT * FROM agentDetails');
 
     // Convert the fetched data to CSV
     const parser = new Parser();

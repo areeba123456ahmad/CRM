@@ -27,20 +27,22 @@ const OrderTracking = () => {
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Tracking_info</th>
-            <th>Status</th>
-            <th>Created at</th>
-            <th>Updated_at</th>
+            <th>Customer Name</th>
+            <th>Agent ID</th>
+            <th>Quantity</th>
+            <th>Order Date</th>
+            <th>Tracking Id</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
             <tr key={order.id}>
               <td>{order.id}</td>
-              <td>{order.tracking_info}</td>
-              <td>{order.status}</td>
-              <td>{order.created_at}</td>
-              <td>{order.updated_at}</td>
+              <td>{order.customer_name}</td>
+              <td>{order.agent_id}</td>
+              <td>{order.quantity}</td>
+              <td>{order.order_date}</td>
+              <td>{order.tracking_id}</td>
             </tr>
           ))}
         </tbody>
