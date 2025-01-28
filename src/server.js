@@ -274,29 +274,35 @@ app.delete("/connections/:id", (req, res) => {
   });
 });
 
-app.get('/api/order-status/:trackingNumber', async (req, res) => {
-  const trackingNumber = req.params.trackingNumber;
-  console.log("Received tracking number:", trackingNumber);
+app.get('/api/order-status/:trackingId', async (req, res) => {
+  const trackingId = req.params.trackingId;
+  console.log("Received tracking ID:", trackingId);
 
-  const query = "SELECT id, status, tracking_info, delivery_date FROM orders WHERE tracking_number = ?";
+  const query = "SELECT id, customer_name, item_id, quantity, agent_id, order_date, tracking_id FROM userOrders WHERE tracking_id = ?";
+  
   try {
-    const [results] = await db.execute(query, [trackingNumber]); // Execute query with async/await
+    const [results] = await db.execute(query, [trackingId]); // Execute query with async/await
+    
     if (results.length === 0) {
       return res.status(404).json({ message: 'Order not found' });
     }
 
-    const order = results[0];
-    res.status(200).json({
+    const orders = results.map(order => ({
       orderId: order.id,
-      status: order.status,
-      trackingInfo: order.tracking_info,
-      deliveryDate: order.delivery_date,
-    });
+      customerName: order.customer_name,
+      itemId: order.item_id,
+      quantity: order.quantity,
+      agentId: order.agent_id,
+      orderDate: order.order_date,
+      trackingId: order.tracking_id,
+    }));
+    res.status(200).json(orders);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).json({ message: 'Error executing query' });
   }
 });
+
 
 app.get('/performance', async (req, res) => {
   try {
