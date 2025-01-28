@@ -1,3 +1,35 @@
+### clone the git repositry
+
+clone the reoprsitory using github link "https://github.com/areeba123456ahmad/CRM.git"
+
+### open the folder in VS-code
+
+after opening the main folder, enter the Folder CRM.
+
+### Install dependencies
+
+open new terminal and run the following command 
+" npm install "
+
+### Start the server
+
+start the server by using the following commands:
+cd src
+node server.js
+
+### run the application
+
+start the application by using npm start.
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -69,27 +101,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
-### clone the git repositry
-
-clone the reoprsitory using github link "https://github.com/areeba123456ahmad/CRM.git"
-
-### open the folder in VS-code
-
-after opening the main folder, enter the Folder CRM.
-
-### Install dependencies
-
-open new terminal and run the following command 
-" npm install "
-
-### Start the server
-
-start the server by using the following commands:
-cd src
-node server.js
-
-### run the application
-
-start the application by using npm start.
 
