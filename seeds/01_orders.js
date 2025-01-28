@@ -1,0 +1,98 @@
+export async function seed(knex) {
+  // Deletes ALL existing entries
+  await knex('orders').del();
+
+  // Inserts seed entries
+  await knex('orders').insert([
+    {
+      sale_id: 1,
+      status: 'Pending',
+      delivery_date: null,
+      tracking_number: null,
+      tracking_info: null,
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 2,
+      status: 'Shipped',
+      delivery_date: '2025-01-20',
+      tracking_number: 'TRACK12345',
+      tracking_info: 'Package is in transit and will be delivered soon.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 3,
+      status: 'Delivered',
+      delivery_date: '2025-01-15',
+      tracking_number: 'TRACK67890',
+      tracking_info: 'Package has been delivered to the recipient.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 4,
+      status: 'In-Transit',
+      delivery_date: null,
+      tracking_number: 'TRACK11223',
+      tracking_info: 'Package is on its way and expected to be delivered soon.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 5,
+      status: 'Pending',
+      delivery_date: null,
+      tracking_number: null,
+      tracking_info: null,
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 6,
+      status: 'Shipped',
+      delivery_date: '2025-01-18',
+      tracking_number: 'TRACK44556',
+      tracking_info: 'Package is being processed for delivery.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 7,
+      status: 'Delivered',
+      delivery_date: '2025-01-10',
+      tracking_number: 'TRACK78901',
+      tracking_info: 'Package has been delivered successfully.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 8,
+      status: 'Shipped',
+      delivery_date: '2025-01-25',
+      tracking_number: 'TRACK22334',
+      tracking_info: 'Package is currently on its way.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 9,
+      status: 'In-Transit',
+      delivery_date: null,
+      tracking_number: 'TRACK99887',
+      tracking_info: 'Package is currently in transit and will be delivered soon.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+    {
+      sale_id: 10,
+      status: 'Delivered',
+      delivery_date: '2025-01-12',
+      tracking_number: 'TRACK55667',
+      tracking_info: 'Package has been successfully delivered to the address.',
+      created_at: knex.fn.now(),
+      updated_at: knex.fn.now(),
+    },
+  ]);
+}

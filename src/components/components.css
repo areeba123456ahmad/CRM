@@ -1,0 +1,293 @@
+:root {
+  --skyBlue: #1f6981;
+  --liBackground:rgb(49, 48, 48);
+ --BackgroundClr: #ccd5d6;
+  --MainBackgound: #e4e4e4;
+  --Bg: rgb(238, 236, 236);
+  --border-color: rgb(162, 240, 249);
+  --text-color: whitesmoke;
+  --hover-shadow: rgba(75, 72, 72, 0.998);
+  --gradient:linear-gradient(to right,  #393939, #6b7374,#296a8d);
+  --gradient2:#aaafaf;
+}
+
+
+.dashboard-layout {
+  background-color: var(--MainBackgound);
+  padding: 20px;
+  width: 100%;
+}
+
+.mainboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--Bg);
+
+}
+
+.mainboard ul {
+  list-style-type: none;
+  margin: 0;
+  top: 30%;
+  left: 5%;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  grid-auto-rows: 250px;
+  gap: 10px;
+  padding: 0;
+  width: 400px;
+  height: 600px;
+  margin-left: 230px;
+}
+
+.mainboard ul li {
+  background-color: #aaafaf;
+  border:5px groove #1f6981;
+  text-align: center;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: bold;
+  display: flex;
+  box-shadow: 13px 13px 13px var(--skyBlue);
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 400px;
+  color: var(--skyBlue);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mainboard ul a {
+  color: var(--skyBlue);
+  text-decoration: none;
+}
+
+.sales-records, .order-tracking {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1200px;
+  position: relative;
+  top: 20px;
+  left: 280px;
+ 
+}
+
+.sales-records {
+  background:var(--gradient);
+}
+
+.order-tracking {
+  background-color: #4a4a4a;
+  margin-bottom: 150px;
+}
+
+.sales-records h2, .connection-tracking  h2 {
+  text-align: center;
+  color: whitesmoke;
+  font-size: 2rem;
+ 
+}
+
+.connection-tracking ,.Delivery-tracking,.permissions,.management {
+  text-align: center;
+  color: whitesmoke;
+  background: var(--gradient);
+ background-color: var(--gradient);
+ font-family: Arial, sans-serif;
+ padding: 20px;
+ border-radius: 10px;
+ max-width: 1200px;
+ position: relative;
+ top: 20px;
+ left: 280px;
+margin-bottom: 150px;
+
+}
+
+.management1 {
+
+width: 400px;
+height: 50px;
+background-color: #b1b6b8a3;
+border-radius: 40px;
+margin: 20px;
+
+}
+
+.management label{
+
+  color:#4a4a4a;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+
+.permissions{
+  margin-bottom: 250px;
+  margin-top: 100px;
+}
+
+.Delivery-tracking {
+  margin-bottom: 500px;
+  margin-top: 100px;
+  height: 200px;
+  padding: 60px;
+}
+
+.Delivery-tracking button{
+border-radius: 30px;
+margin-top: 30px;
+height: 50px;
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: var(--skyBlue);
+  color: #fff;
+  font-weight: bold;
+}
+
+td {
+  background-color: #acacac;
+}
+
+button {
+  background-color: #383a3b;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color:rgb(58, 57, 57);
+  font-size: 1rem;
+}
+
+button[type="submit"]:hover {
+  background-color: #27ae60;
+}
+
+button[type="button"] {
+  background-color: var(--hover-shadow);
+  font-size: 1rem;
+  color: whitesmoke;
+  margin-bottom: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #c0392b;
+}
+
+form input, form button {
+  width: 100%;
+}
+
+form button[type="submit"] {
+  padding: 10px 15px;
+}
+
+.sales-records table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mainboard ul {
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .mainboard ul li {
+    clip-path: none;
+    width: auto;
+    height: 150px;
+    font-size: medium;
+  }
+}
+
+
+
+.orders{
+  text-align: center;
+  
+ border-radius: 30px;
+ border: 5px groove var(--skyBlue);
+ background-color:rgba(206, 206, 206, 0.788);
+ font-family: Arial, sans-serif;
+ padding: 20px;
+ border-radius: 10px;
+ max-width: 1200px;
+ position: relative;
+ top: 20px;
+ left: 280px;
+margin-bottom: 150px;
+}
+
+.team-performance-card{
+  background: #aaafaf !important;
+  border: 3px groove var(--skyBlue);
+  box-shadow: 6px 6px 6px skyblue;
+margin: 20px;
+
+
+}
+
+.repButton{
+margin-top: 80px;
+margin: 20px;
+background: var(--gradient);
+color:whitesmoke;
+height: 70px;
+border-radius: 40px;
+}
+
+.repButton.second {
+  margin-top: 100px; /* Adjust this to move the second button lower */
+}

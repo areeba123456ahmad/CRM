@@ -1,0 +1,68 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+  
+  /* Container for the report page */
+  .report-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  /* Loading State Styling */
+  button:disabled {
+    color: #fff;
+    font-style: italic;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .report-container {
+      width: 90%;
+      padding: 20px;
+    }
+  
+    button {
+      width: 100%;
+      font-size: 18px;
+    }
+  }
+  

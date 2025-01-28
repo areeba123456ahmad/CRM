@@ -1,0 +1,99 @@
+:root {
+    --skyBlue: #1f6981;
+   --BackgroundClr: #ccd5d6;
+    --MainBackgound: #e4e4e4;
+    --sidebar-bg: rgb(238, 236, 236);
+    --border-color: rgb(162, 240, 249);
+    --text-color: #f7f5f5;
+    --text-color2: #4a4a4a;
+    --hover-shadow: rgba(0, 0, 0, 0.3);
+    --gradient:linear-gradient(to right,  #393939, #6b7374,#296a8d);
+    --gradient2:#e0efee;
+  }
+  
+
+
+.dashboard-layout {
+    background-color: whitesmoke;
+}
+
+.mainboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: whitesmoke;
+}
+
+.mainboard ul {
+    list-style-type: none;
+    margin: 0;
+    top: 30%;
+    left: 5%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    grid-auto-rows:250px ; /* Fixed row height for a rectangle */
+    gap: 10px; /* No gaps between pieces */
+    padding: 0;
+    width: 800px;
+    height: 600px;
+margin-left: 230px;
+}
+
+.mainboard ul li {
+   
+    border: 2px solid #fff; /* Create a "puzzle piece" border */
+    text-align: center;
+    font-size: 25px;
+    font-style: italic;
+    border:5px groove #1f6981;
+
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 400px;
+    box-shadow: 5px 10px 15px var(--skyBlue), inset 0 0 5px rgba(0, 0, 0, 0.2) !important; /* Enhanced shadow */
+    color: var(--skyBlue);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mainboard ul a {
+   
+    color: var(--skyBlue);
+   text-decoration: none;
+}
+
+/* Shape each puzzle piece */
+.mainboard ul li:nth-child(odd) {
+    clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
+}
+
+.mainboard ul li:nth-child(even) {
+    clip-path: polygon(0% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 0% 100%, 10% 90%, 10% 10%);
+}
+
+/* Adjust hover effect */
+.mainboard ul li:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mainboard ul {
+        grid-template-columns: 1fr; /* Single column on small screens */
+        width: 100%;
+        gap: 5px; /* Add slight gaps for readability */
+    }
+
+    .mainboard ul li {
+        clip-path: none; /* Simplify shapes for smaller screens */
+        width: auto;
+        height: 150px;
+        font-size: medium;
+        
+    }
+}

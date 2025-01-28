@@ -1,0 +1,85 @@
+
+:root {
+  --skyBlue: #1f6981;
+  --liBackground:rgb(49, 48, 48);
+ --BackgroundClr: #ccd5d6;
+  --MainBackgound: #e4e4e4;
+  --sidebar-bg: rgb(238, 236, 236);
+  --border-color: rgb(162, 240, 249);
+  --text-color: #464646;
+  --hover-shadow: rgba(0, 0, 0, 0.3);
+  --gradient:linear-gradient(to right,  #393939, #6b7374,#296a8d);
+}
+
+
+
+
+
+.background{
+    background: var(--gradient);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.login-container {
+  
+    max-width: 800px;
+    left: 30%;
+    top: 15%;
+    position: absolute;
+    padding: 20px;
+    border: 10px solid #97d6e3;
+    border-radius: 40px;
+    height: 500px;
+    background-color: #fff9f9;
+    border-style: double groove double;
+    box-shadow: 5px 10px 15px var(--skyBlue) ;
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    text-decoration:  underline;
+    font-size: 30px;
+margin-bottom: 30px;
+   
+  }
+  
+  .login-container input {
+    width: 80%;
+    margin: 30px ;
+      margin-top: 20px;
+    padding: 10px;
+    background-color: #edf9fd;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #434343;
+    font-size: 20px;
+    place-self: center;
+    box-shadow: 4px 4px 4px 3px var(--skyBlue);
+    border: 1px solid rgb(175, 251, 255);
+  }
+  
+  .login-container button {
+    width: 60%;
+    padding: 10px;
+    background: var(--gradient);
+
+    color: whitesmoke;
+    box-shadow: 1px 2px 1px var(--skyBlue);
+    margin-left: 80px;
+    border-radius: 180px;
+    cursor: pointer;
+    border: 2px solid rgb(202, 255, 250);
+    font-weight: bolder;
+    
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+  }
+  
